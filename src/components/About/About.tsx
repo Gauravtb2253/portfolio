@@ -1,5 +1,5 @@
 import { Container } from "./styles";
-import ScrollAnimation from "react-animate-on-scroll";
+import { motion } from "framer-motion";
 
 import gcpIcon from "../../assets/gcp.svg";
 import azureIcon from "../../assets/azure.svg";
@@ -18,86 +18,133 @@ const skills = [
   { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript" },
 ];
 
+const fadeLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export function About() {
   return (
     <Container id="about">
       <div className="about-grid">
+
         {/* LEFT SIDE */}
         <div className="about-text">
-          <ScrollAnimation animateIn="fadeInLeft">
-            <h2>About me</h2>
-          </ScrollAnimation>
 
-          <ScrollAnimation animateIn="fadeInLeft" delay={100}>
+          <motion.h2
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            About me
+          </motion.h2>
+
+          <motion.div
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
             <p>
               Hi, I’m Gaurav, a DevOps engineer with around 1 year of experience
-              working with cloud platforms like Google Cloud Platform and
-              Microsoft Azure. I use Terraform to manage infrastructure and
-              build CI/CD pipelines that enable reliable and consistent
-              deployments.
+              working with cloud platforms like Google Cloud Platform and Microsoft Azure.
+              I use Terraform to manage infrastructure and build CI/CD pipelines.
             </p>
 
             <p>
-              My work involves handling day-to-day DevOps tasks across
-              deployments, infrastructure, and issue resolution in cloud
-              environments. I aim to keep systems stable, efficient, and easy to
-              manage.
+              My work involves handling deployments, infrastructure, and issue resolution
+              in cloud environments. I aim to keep systems stable and efficient.
             </p>
 
             <p>
-              I also have exposure to incident management practices through
-              project work, and I’m particularly interested in cloud-native
-              technologies and AI-driven tooling. I’m continuously learning and
-              improving my skills.
+              I also have exposure to incident management and I’m interested in
+              cloud-native technologies and AI-driven tooling.
             </p>
-          </ScrollAnimation>
+          </motion.div>
 
-          <ScrollAnimation animateIn="fadeInLeft" delay={200}>
-            <div className="section-box">
-              <h3>Education:</h3>
-              <h4> Bachelor of Technology (B.Tech)</h4>
-              <p>Vishwakarma Institute of Technology, Pune | 2021 - 2025</p>
-              <p>9.04 CGPA</p>
+          {/* EDUCATION */}
+          <motion.div
+            className="section-box"
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3>Education:</h3>
+            <h4>Bachelor of Technology (B.Tech)</h4>
+            <p>Vishwakarma Institute of Technology, Pune | 2021 - 2025</p>
+            <p>9.04 CGPA</p>
+          </motion.div>
+
+          {/* EXPERIENCE */}
+          <motion.div
+            className="section-box"
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.6, delay: 0.25 }}
+            viewport={{ once: true }}
+          >
+            <h3>Experience</h3>
+
+            <div className="role">
+              <h4>DevOps Analyst</h4>
+              <p>MSCI Inc.</p>
+              <span>July 2025 – Present • Mumbai, India</span>
             </div>
-          </ScrollAnimation>
 
-          <ScrollAnimation animateIn="fadeInLeft" delay={200}>
-            <div className="section-box">
-              <h3>Experience</h3>
-
-              <div className="role">
-                <h4>DevOps Analyst</h4>
-                <p>MSCI Inc.</p>
-                <span>July 2025 – Present • Mumbai, India</span>
-              </div>
-
-              <div className="role">
-                <h4>DevOps Intern</h4>
-                <p>MSCI Inc.</p>
-                <span>January 2025 – June 2025 • Mumbai, India</span>
-              </div>
+            <div className="role">
+              <h4>DevOps Intern</h4>
+              <p>MSCI Inc.</p>
+              <span>January 2025 – June 2025 • Mumbai, India</span>
             </div>
-          </ScrollAnimation>
+          </motion.div>
 
-          <ScrollAnimation animateIn="fadeInLeft" delay={200}>
-            <h3 className="skills-heading">Here are my main skills:</h3>
-          </ScrollAnimation>
+          {/* SKILLS TITLE */}
+          <motion.h3
+            className="skills-heading"
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            Here are my main skills:
+          </motion.h3>
 
+          {/* SKILLS GRID */}
           <div className="hard-skills">
             {skills.map((skill, index) => (
-              <div className="hability" key={skill.name}>
-                <ScrollAnimation animateIn="fadeInUp" delay={100 + index * 50}>
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    title={skill.name}
-                    width="40"
-                    height="40"
-                  />
-                </ScrollAnimation>
-              </div>
+              <motion.div
+                className="hability"
+                key={skill.name}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.1 }}
+              >
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  title={skill.name}
+                  width="40"
+                  height="40"
+                />
+              </motion.div>
             ))}
           </div>
+
         </div>
       </div>
     </Container>

@@ -1,14 +1,9 @@
 import { Container } from "./styles";
 import { BrowserRouter as Router } from "react-router-dom";
 import { NavHashLink } from "react-router-hash-link";
-import { useState } from "react";
 
 export function Header() {
-  const [isActive, setActive] = useState(false);
-
-  function closeMenu() {
-    setActive(false);
-  }
+  function closeMenu() {}
 
   return (
     <Container>
